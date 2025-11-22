@@ -1,13 +1,7 @@
-using MediatR;
 using Microservice.Catalog.Api;
 using Microservice.Catalog.Api.Features.Categories;
-using Microservice.Catalog.Api.Features.Categories.Create;
+using Microservice.Catalog.Api.Features.Courses;
 using Microservice.Catalog.Api.Options;
-using Microservice.Catalog.Api.Repositories;
-using Microservice.Shared.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +50,7 @@ var app = builder.Build();
 
 //category grup ile ilgili tüm endpointler eklenmiþ oldu.
 app.AddCategoryGroupEndpointExt();
+app.AddCourseGroupEndpointExt();
 
 if (app.Environment.IsDevelopment())
 {
