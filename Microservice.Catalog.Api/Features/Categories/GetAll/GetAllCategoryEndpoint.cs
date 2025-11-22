@@ -10,8 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.Catalog.Api.Features.Categories.GetAll
 {
-
-    public class GetAllCategoryQuery : IRequest<ServiceResult<List<CategoryDto>>>;
+    //refactoring
+    public class GetAllCategoryQuery : IRequestByServiceResult<List<CategoryDto>>;
+    
+    
+    //public class GetAllCategoryQuery : IRequest<ServiceResult<List<CategoryDto>>>;
 
     public class GetAllCategoryQueryHandler(AppDbContext context, IMapper mapper) : IRequestHandler<GetAllCategoryQuery, ServiceResult<List<CategoryDto>>>
     {
