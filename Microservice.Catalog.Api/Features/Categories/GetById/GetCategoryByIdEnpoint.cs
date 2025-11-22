@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using Microservice.Catalog.Api.Features.Categories.Dtos;
-using Microservice.Catalog.Api.Features.Categories.GetAll;
-using Microservice.Catalog.Api.Repositories;
-using Microservice.Shared;
-using Microservice.Shared.Extensions;
-using System.Net;
-
-namespace Microservice.Catalog.Api.Features.Categories.GetById
+﻿namespace Microservice.Catalog.Api.Features.Categories.GetById
 {
     //refactoring
     public record GetCategoryByIdQuery(Guid Id) : IRequestByServiceResult<CategoryDto>;
