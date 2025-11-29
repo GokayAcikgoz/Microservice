@@ -34,8 +34,23 @@ builder.Services.AddDatabaseServiceExt();
 //builder.Services.AddMediatR(x => x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddCommonServiceExt(typeof(CatalogAsembly));
 
+
+builder.Services.AddVersioningExt();
+
 var app = builder.Build();
 
+
+app.AddSeedDataExt().ContinueWith(x =>
+{
+    if (x.IsFaulted)
+    {
+        Console.WriteLine(x.Exception?.Message);
+    }
+    else
+    {
+        Console.WriteLine("Seed data baþarýyla eklendi.");
+    }
+});
 
 //minimalapi
 //bu kod verticalslice a uygun deðil düzelticez bunu.
@@ -48,9 +63,11 @@ var app = builder.Build();
 //    };
 //});
 
+
+
 //category grup ile ilgili tüm endpointler eklenmiþ oldu.
-app.AddCategoryGroupEndpointExt();
-app.AddCourseGroupEndpointExt();
+app.AddCategoryGroupEndpointExt(app.AddVersionSetExt());
+app.AddCourseGroupEndpointExt(app.AddVersionSetExt());
 
 if (app.Environment.IsDevelopment())
 {

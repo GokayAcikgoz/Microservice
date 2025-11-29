@@ -17,7 +17,7 @@ namespace Microservice.Catalog.Api.Features.Categories.Create
 
             //Kısa hali
             group.MapPost("/", async (CreateCategoryCommand command, IMediator mediator) => (await mediator.Send(command)
-            ).ToGenericResult()).WithName("CreateCategory").AddEndpointFilter<ValidationFilter<CreateCategoryCommand>>();
+            ).ToGenericResult()).WithName("CreateCategory").MapToApiVersion(1, 0).AddEndpointFilter<ValidationFilter<CreateCategoryCommand>>();
 
             return group;
         }

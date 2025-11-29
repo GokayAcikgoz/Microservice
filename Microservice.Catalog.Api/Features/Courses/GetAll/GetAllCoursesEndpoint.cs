@@ -31,7 +31,7 @@ namespace Microservice.Catalog.Api.Features.Courses.GetAll
         public static RouteGroupBuilder GetAllCourseGroupItemEndpoint(this RouteGroupBuilder group)
         {
             //Kısa hali
-            group.MapGet("/", async (IMediator mediator) => (await mediator.Send(new GetAllCoursesQuery())).ToGenericResult())
+            group.MapGet("/", async (IMediator mediator) => (await mediator.Send(new GetAllCoursesQuery())).ToGenericResult()).MapToApiVersion(1, 0)
                 .WithName("GetAllCourses");
 
             return group;
