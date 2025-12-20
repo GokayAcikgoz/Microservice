@@ -2,12 +2,13 @@
 using Microservice.Basket.Api.Const;
 using Microservice.Basket.Api.Dto;
 using Microservice.Shared;
+using Microservice.Shared.Services;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
 
 namespace Microservice.Basket.Api.Features.Baskets.AddBasketItem
 {
-    public class AddBasketItemCommandHandler(IDistributedCache distributedCache) : IRequestHandler<AddBasketItemCommand, ServiceResult>
+    public class AddBasketItemCommandHandler(IDistributedCache distributedCache, IIdentityService identityService) : IRequestHandler<AddBasketItemCommand, ServiceResult>
     {
         public async Task<ServiceResult> Handle(AddBasketItemCommand request, CancellationToken cancellationToken)
         {
@@ -15,7 +16,8 @@ namespace Microservice.Basket.Api.Features.Baskets.AddBasketItem
 
             //TODO : change userId
             //Guid userId = Guid.NewGuid(); //Simüle amaçlı. Normalde userdan alacağız
-            Guid userId = Guid.Parse("185cc9d6-e67d-4623-abd8-6d70f8fbc77c");
+            //Guid userId = Guid.Parse("185cc9d6-e67d-4623-abd8-6d70f8fbc77c");
+            Guid userId = identityService.GetUserId;
             var cacheKey = string.Format(BasketConst.BasketCacheKey, userId);
 
             var basketAsString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
